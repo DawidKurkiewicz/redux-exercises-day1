@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { combineReducers, createStore } from 'redux'
-import todos from './store'
+import todos, { addTodo} from './store'
 
 
 const RootReducer = combineReducers({
@@ -11,6 +11,9 @@ const RootReducer = combineReducers({
 })
 const store = createStore(() => {})
 
+
+console.warn(store.getState())
+store.dispatch(addTodo('Go shopping'))
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
