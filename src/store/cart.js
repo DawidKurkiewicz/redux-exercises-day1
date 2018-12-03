@@ -1,7 +1,3 @@
-export const addTodo = (item) => ({
-    type: ADD_TO_CART,
-    item
-})
 
 const ADD_TO_CART = 'ADD_TO_CART'
 const INITIAL_STATE = {

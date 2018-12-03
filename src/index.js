@@ -5,7 +5,7 @@ import App from './App';
 import { combineReducers, createStore } from 'redux'
 import todos, { addTodo } from './store/todos'
 import counter, { increment, decrement, reset } from './store/counter'
-import cart, { addPrice} from './store/cart'
+import cart, { addPrice } from './store/cart'
 
 
 const rootReducer = combineReducers({
@@ -26,13 +26,15 @@ store.dispatch(decrement())
 store.dispatch(reset())
 store.dispatch(addPrice(20))
 store.dispatch(addPrice(30))
+store.dispatch(addPrice(30))
+
 
 
 
 
 
 window.increaseCounter = () => store.dispatch(increment())
-window.addTodo = (text)  => store.dispatch(addTodo(text))
+window.addTodo = (text) => store.dispatch(addTodo(text))
 window.decreaseCounter = () => store.dispatch(decrement())
 window.reset = () => store.dispatch(reset())
 window.addPrice = () => store.dispatch(addPrice())
