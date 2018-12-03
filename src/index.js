@@ -6,14 +6,17 @@ import { combineReducers, createStore } from 'redux'
 import todos, { addTodo} from './store'
 
 
-const RootReducer = combineReducers({
+const rootReducer = combineReducers({
     todos
 })
-const store = createStore(() => {})
+const store = createStore(rootReducer)
 
 
 console.warn(store.getState())
 store.dispatch(addTodo('Go shopping'))
+store.dispatch(addTodo('some other thing'))
+store.dispatch(addTodo('clean the house'))
+console.warn(store.getState())
 
 ReactDOM.render(<App />, document.getElementById('root'));
 
