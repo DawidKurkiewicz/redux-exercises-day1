@@ -5,11 +5,13 @@ import App from './App';
 import { combineReducers, createStore } from 'redux'
 import todos, { addTodo } from './store/todos'
 import counter, { increment, decrement, reset } from './store/counter'
+import cart, { addPrice} from './store/cart'
 
 
 const rootReducer = combineReducers({
     todos,
-    counter
+    counter,
+    cart
 })
 const store = createStore(rootReducer,
     window.__REDUX_DEVTOOLS_EXTENSION__ &&
@@ -22,6 +24,9 @@ store.dispatch(addTodo('clean the house'))
 store.dispatch(increment())
 store.dispatch(decrement())
 store.dispatch(reset())
+store.dispatch(addPrice(20))
+store.dispatch(addPrice(30))
+
 
 
 
@@ -30,6 +35,8 @@ window.increaseCounter = () => store.dispatch(increment())
 window.addTodo = (text)  => store.dispatch(addTodo(text))
 window.decreaseCounter = () => store.dispatch(decrement())
 window.reset = () => store.dispatch(reset())
+window.addPrice = () => store.dispatch(addPrice())
+
 
 
 
