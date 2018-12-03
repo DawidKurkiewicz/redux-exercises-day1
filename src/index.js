@@ -24,9 +24,7 @@ store.dispatch(addTodo('clean the house'))
 store.dispatch(increment())
 store.dispatch(decrement())
 store.dispatch(reset())
-store.dispatch(addPrice(20))
-store.dispatch(addPrice(30))
-store.dispatch(addPrice(30))
+
 
 
 
