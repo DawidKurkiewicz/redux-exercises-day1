@@ -3,13 +3,17 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import { combineReducers, createStore } from 'redux'
-import todos, { addTodo} from './store'
+import todos, { addTodo } from './store/todos'
+import counter from './store/counter'
 
 
 const rootReducer = combineReducers({
-    todos
+    todos,
+    counter
 })
-const store = createStore(rootReducer)
+const store = createStore(rootReducer,
+    window.__REDUX_DEVTOOLS_EXTENSION__ &&
+    window.__REDUX_DEVTOOLS_EXTENSION__())
 
 
 console.warn(store.getState())
