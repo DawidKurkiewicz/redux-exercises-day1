@@ -1,6 +1,7 @@
 const ADD_TODO = 'ADD_TODO'
 const FILTER_TODO = 'FILTER_TODO'
 const TOGGLE_TODO = 'TOGGLE_TODO'
+const DELETE_TODO = 'DELETE_TODO'
 
 
 const INITIAL_STATE = {
@@ -22,6 +23,10 @@ export const toggleTodo = index => ({
     type: TOGGLE_TODO,
     index
 })
+ export const deleteTodo = index => ({
+     type: DELETE_TODO,
+     index
+ })
 
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
@@ -49,8 +54,17 @@ export default (state = INITIAL_STATE, action) => {
                     todo
 
                 )
+                
 
             }
+            case DELETE_TODO:
+            return {
+                ...state,
+                allTodos: state.allTodos.filter((todo, index) => (index !== action.index))
+            }
+
+            
+
         default:
             return state
     }
