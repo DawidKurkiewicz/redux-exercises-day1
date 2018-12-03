@@ -15,12 +15,11 @@ export const addPrice = (title, price) => ({
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ADD_TO_CART:
-            const newState = {
+            return {
                 ...state,
                 items: [...state.items, action.item],
                 cartTotal: (state.cartTotal + action.item.price)
             }
-            return newState
         default:
             return state
     }
