@@ -1,10 +1,11 @@
 const ADD_TODO = 'ADD_TODO'
 const FILTER_TODO = 'FILTER_TODO'
+const TOGGLE_TODO = 'TOGGLE_TODO'
 
 
 const INITIAL_STATE = {
     allTodos: [],
-    filteredTodos: []
+    visibleTodos: []
 }
 
 
@@ -17,6 +18,11 @@ export const filterTodos = text => ({
     input: text
 })
 
+export const toggleTodo = index => ({
+    type: TOGGLE_TODO,
+    index
+})
+
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case ADD_TODO:
@@ -25,12 +31,26 @@ export default (state = INITIAL_STATE, action) => {
                 ...state,
                 allTodos: [...state.allTodos, newTodo]
             }
-            case FILTER_TODO:
+        case FILTER_TODO:
             return {
                 ...state,
-                filteredTodos: state.allTodos.filter(todo => todo.text.includes(action.input))
+                visibleTodos: state.allTodos.filter(todo => todo.text.includes(action.input))
             }
-            default:
+        case TOGGLE_TODO:
+            return {
+                ...state,
+                allTodos: state.allTodos.map((todo, index) => {
+                    if (index === action.index) {
+                        return {
+                            ...todo,
+                            completed: !todo.completed
+                        }
+                    }
+                    return todo
+                })
+
+            }
+        default:
             return state
     }
 }
