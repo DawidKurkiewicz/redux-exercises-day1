@@ -39,15 +39,16 @@ export default (state = INITIAL_STATE, action) => {
         case TOGGLE_TODO:
             return {
                 ...state,
-                allTodos: state.allTodos.map((todo, index) => {
-                    if (index === action.index) {
-                        return {
-                            ...todo,
-                            completed: !todo.completed
-                        }
+                allTodos: state.allTodos.map((todo, index) => (index === action.index)
+                    ?
+                    {
+                        ...todo,
+                        completed: !todo.completed
                     }
-                    return todo
-                })
+                    :
+                    todo
+
+                )
 
             }
         default:
