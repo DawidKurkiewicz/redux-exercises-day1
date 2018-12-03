@@ -37,7 +37,8 @@ window.increaseCounter = () => store.dispatch(increment())
 window.addTodo = (text) => store.dispatch(addTodo(text))
 window.decreaseCounter = () => store.dispatch(decrement())
 window.reset = () => store.dispatch(reset())
-window.addPrice = () => store.dispatch(addPrice())
+window.addPrice = (title, price) => store.dispatch(addPrice(title, price))
+
 
 
 
