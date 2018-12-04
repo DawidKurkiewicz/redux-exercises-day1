@@ -12,7 +12,7 @@ export const increment = (value = 1) => ({
 export const decrement = (value = 1) => ({
     type: DECREMENT,
     value
-})
+})aaaaadsadassdafasdfas
 
 export const reset = () => ({
     type: RESET
