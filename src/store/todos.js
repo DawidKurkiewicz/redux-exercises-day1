@@ -48,38 +48,31 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 filter: action.input,
-                visibleTodos: getVisibleTodos(state, action)
+                visibleTodos: getVisibleTodos(state.allTodos, action)
             }
         case TOGGLE_TODO:
+            const allTodosWithToggled = state.allTodos.map((todo, index) => (index === action.index)
+                ? { ...todo, completed: !todo.completed }
+                : todo
+            );
             return {
                 ...state,
-                allTodos: state.allTodos.map((todo, index) => (index === action.index)
-                    ?
-                    {
-                        ...todo,
-                        completed: !todo.completed
-                    }
-                    :
-                    todo
-
-                )
-
-
+                allTodos: allTodosWithToggled,
+                visibleTodos: getVisibleTodos(allTodosWithToggled, state.filter)
             }
         case DELETE_TODO:
+            const allTodosWithDeleted = state.allTodos.filter((todo, index) => !(index === action.index));
             return {
                 ...state,
-                allTodos: state.allTodos.filter((todo, index) => (index !== action.index))
+                allTodos: allTodosWithDeleted,
+                visibleTodos: getVisibleTodos(allTodosWithDeleted, state.filter)
             }
-
-
-
         default:
-            return state
+            return state;
     }
 }
 function getVisibleTodos(state, action) {
     return state.allTodos.filter(
-        todo => todo.text.includes(action.input))
+        todo => todo.text.includes(state.filter))
 
 }
