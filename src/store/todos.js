@@ -48,7 +48,7 @@ export default (state = INITIAL_STATE, action) => {
             return {
                 ...state,
                 filter: action.input,
-                visibleTodos: getVisibleTodos(state.allTodos, action)
+                visibleTodos: getVisibleTodos(state.allTodos, action.input)
             }
         case TOGGLE_TODO:
             const allTodosWithToggled = state.allTodos.map((todo, index) => (index === action.index)
@@ -71,8 +71,8 @@ export default (state = INITIAL_STATE, action) => {
             return state;
     }
 }
-function getVisibleTodos(state, action) {
-    return state.allTodos.filter(
-        todo => todo.text.includes(state.filter))
+function getVisibleTodos(allTodos, filter) {
+    return allTodos.filter(
+        todo => todo.text.includes(filter))
 
 }
