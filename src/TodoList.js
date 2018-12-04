@@ -42,23 +42,34 @@ class TodoList extends React.PureComponent {
     render() {
 
         return <div>
+            {this.renderInput()}
+            {this.renderList()}
+        </div>
+
+    }
+    renderInput() {
+        return <div>
             <input onChange={this.handleInputChange} />
             <button onClick={this.handleButtonClick}> add Todo </button>
-            {this.props._todos.map((todo, index) =>
-                <div
-                    style={{
-                        textDecoration: todo.completed ? 'line-through' : 'none'
-                    }}
-                    key={todo.text}> 
-                    <div onClick={() => this.handleTodoClick(index)}> {todo.text}</div>
-
-
-                    <button type="button" onClick={() => this.handleDelete(index)}> x </button>
-
-                </div>
-            )
-            }
         </div>
     }
+
+
+    renderList() {
+        return this.props._todos.map((todo, index) =>
+            <div
+                style={{
+                    textDecoration: todo.completed ? 'line-through' : 'none'
+                }}
+                key={todo.text}>
+                <div onClick={() => this.handleTodoClick(index)}> {todo.text}</div>
+
+
+                <button type="button" onClick={() => this.handleDelete(index)}> x </button>
+
+            </div>
+        )
+    }
+
 }
 export default connect(mapStateToProps, mapDispatchToProps)(TodoList)
