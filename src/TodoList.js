@@ -25,7 +25,7 @@ const mapDispatchToProps = dispatch => ({
 
 class TodoList extends React.PureComponent {
 
-    state = { 
+    state = {
         value: '',
         search: '' }
 
