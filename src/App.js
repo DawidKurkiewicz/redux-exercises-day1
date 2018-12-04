@@ -1,11 +1,11 @@
 import React from 'react';
-import TodoList from './TodoList'
+import Counter from './Counter'
 
 
 
 class App extends React.Component {
   render() {
-    return <TodoList  />
+    return <Counter  />
   }
 }
 export default App
