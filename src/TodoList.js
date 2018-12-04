@@ -2,6 +2,8 @@ import React from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from './store/todos'
 import { toggleTodo } from './store/todos'
+import { deleteTodo } from './store/todos'
+
 
 
 
@@ -12,7 +14,9 @@ const mapStateToProps = store => ({
 
 const mapDispatchToProps = dispatch => ({
     _addTodo: text => dispatch(addTodo(text)),
-    _toggleTodo: index => dispatch(toggleTodo(index))
+    _toggleTodo: index => dispatch(toggleTodo(index)),
+    _deleteTodo: index => dispatch(deleteTodo(index))
+
 })
 
 class TodoList extends React.PureComponent {
@@ -28,9 +32,12 @@ class TodoList extends React.PureComponent {
     }
 
 
-handleTodoClick = index => {
-this.props._toggleTodo(index)
-}
+    handleTodoClick = index => {
+        this.props._toggleTodo(index)
+    }
+    handleDelete = index => {
+        this.props._deleteTodo(index)
+    }
 
     render() {
 
@@ -39,10 +46,18 @@ this.props._toggleTodo(index)
             <button onClick={this.handleButtonClick}> add Todo </button>
             {this.props._todos.map((todo, index) =>
                 <div
-                style = {{textDecoration: todo.completed ? 'line-through' : 'none'}}
-                onClick ={ () => this.handleTodoClick(index)}
-                key={todo.text}> {todo.text}</div>
-            )}
+                    style={{
+                        textDecoration: todo.completed ? 'line-through' : 'none'
+                    }}
+                    key={todo.text}> 
+                    <div onClick={() => this.handleTodoClick(index)}> {todo.text}</div>
+
+
+                    <button type="button" onClick={() => this.handleDelete(index)}> x </button>
+
+                </div>
+            )
+            }
         </div>
     }
 }
