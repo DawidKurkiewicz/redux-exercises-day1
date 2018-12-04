@@ -18,12 +18,14 @@ class TodoList extends React.PureComponent {
     }
     handleButtonClick = event => {
         console.log('want to save todo: ', this.state.value)
+        this.props.addTodo(this.state.value)
     }
 
 
 
 
     render() {
+
         return <div>
             <input onChange={this.handleInputChange} />
             <button onClick={this.handleButtonClick}> add Todo </button>
