@@ -50,7 +50,10 @@ class TodoList extends React.PureComponent {
     renderInput() {
         return <div>
             <input onChange={this.handleInputChange} />
-            <button onClick={this.handleButtonClick}> add Todo </button>
+            <button
+                onClick={this.handleButtonClick}>
+                add Todo
+            </button>
         </div>
     }
 
@@ -58,14 +61,14 @@ class TodoList extends React.PureComponent {
     renderList() {
         return this.props._todos.map((todo, index) =>
             <div
-                style={{
-                    textDecoration: todo.completed ? 'line-through' : 'none'
-                }}
+                style={{ textDecoration: todo.completed ? 'line-through' : 'none' }}
                 key={todo.text}>
                 <div onClick={() => this.handleTodoClick(index)}> {todo.text}</div>
 
 
-                <button type="button" onClick={() => this.handleDelete(index)}> x </button>
+                <button
+                    type="button"
+                    onClick={() => this.handleDelete(index)}> x </button>
 
             </div>
         )
