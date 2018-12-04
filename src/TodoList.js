@@ -1,6 +1,8 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from './store/todos'
+import { toggleTodo } from './store/todos'
+
 
 
 const mapStateToProps = store => ({
@@ -9,7 +11,8 @@ const mapStateToProps = store => ({
 
 
 const mapDispatchToProps = dispatch => ({
-    _addTodo: text => dispatch(addTodo(text))
+    _addTodo: text => dispatch(addTodo(text)),
+    _toggleTodo: index => dispatch(toggleTodo(index))
 })
 
 class TodoList extends React.PureComponent {
@@ -25,15 +28,20 @@ class TodoList extends React.PureComponent {
     }
 
 
-
+handleTodoClick = index => {
+this.props._toggleTodo(index)
+}
 
     render() {
 
         return <div>
             <input onChange={this.handleInputChange} />
             <button onClick={this.handleButtonClick}> add Todo </button>
-            {this.props._todos.map(todo =>
-                <div key={todo.text}> {todo.text}</div>
+            {this.props._todos.map((todo, index) =>
+                <div
+                style = {{textDecoration: todo.completed ? 'line-through' : 'none'}}
+                onClick ={ () => this.handleTodoClick(index)}
+                key={todo.text}> {todo.text}</div>
             )}
         </div>
     }
