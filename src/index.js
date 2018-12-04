@@ -6,6 +6,7 @@ import { combineReducers, createStore } from 'redux'
 import todos, { addTodo, filterTodos, toggleTodo, deleteTodo } from './store/todos'
 import counter, { increment, decrement, reset } from './store/counter'
 import cart, { addPrice } from './store/cart'
+import { Provider } from 'react-redux'
 
 
 const rootReducer = combineReducers({
@@ -44,5 +45,9 @@ window.deleteTodo = index => store.dispatch(deleteTodo(index))
 
 
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root'));
 
