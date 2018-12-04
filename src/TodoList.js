@@ -3,25 +3,31 @@ import { connect } from 'react-redux'
 import { addTodo } from './store/todos'
 import { toggleTodo } from './store/todos'
 import { deleteTodo } from './store/todos'
+import { filterTodos } from './store/todos'
+
 
 
 
 
 const mapStateToProps = store => ({
-    _todos: store.todos.allTodos,
+    _todos: store.todos.visibleTodos,
 })
 
 
 const mapDispatchToProps = dispatch => ({
     _addTodo: text => dispatch(addTodo(text)),
     _toggleTodo: index => dispatch(toggleTodo(index)),
-    _deleteTodo: index => dispatch(deleteTodo(index))
+    _deleteTodo: index => dispatch(deleteTodo(index)),
+    _filterTodos: text => dispatch(filterTodos(text))
+
 
 })
 
 class TodoList extends React.PureComponent {
 
-    state = { value: '' }
+    state = { 
+        value: '',
+        search: '' }
 
     handleInputChange = event => {
         this.setState({ value: event.target.value })
@@ -39,9 +45,19 @@ class TodoList extends React.PureComponent {
         this.props._deleteTodo(index)
     }
 
+    handleInputSearchChange =  event => {
+        this.setState({ search: event.target.value })
+    }
+
+    handleButtonSearchClick = () => {
+        this.props._filterTodos(this.state.search)
+    }
+
+
     render() {
 
         return <div>
+            {this.renderFilterTodos()}
             {this.renderInput()}
             {this.renderList()}
         </div>
@@ -54,6 +70,15 @@ class TodoList extends React.PureComponent {
                 onClick={this.handleButtonClick}>
                 add Todo
             </button>
+        </div>
+    }
+    renderFilterTodos() {
+        return <div>
+            <input onChange={this.handleInputSearchChange} />
+            <button
+                onClick={this.handleButtonSearchClick}>
+                search
+        </button>
         </div>
     }
 
